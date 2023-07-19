@@ -8,7 +8,7 @@
 
 您可以先从试用版下载地址下载各个平台的二进制包
 
-试用版下载地址： http://fctsdb.rockontrol.com:20080/fctsdb/
+免费版下载地址：https://github.com/falcontsdb/release/releases
 
 #### 2. 解压
 

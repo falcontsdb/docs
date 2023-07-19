@@ -30,7 +30,5 @@
 
 欢迎垂询海东青官网：https://www.rockontrol.com/hdqwlwsjk.jhtml
 
-欢迎下载试用版试用：http://fctsdb.rockontrol.com:20080/fctsdb/
-
-
+免费版下载地址：https://github.com/falcontsdb/release/releases
 
