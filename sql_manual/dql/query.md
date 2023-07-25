@@ -156,7 +156,7 @@ distinct关键字主要是对数据去重，由于Group从句和Select从句组�
 
      ​	b. 分组不聚合。例如：select distinct a,b from table group by c  
 
-2. 全局排序：组内去重除外的所有情况  
+2. 全局去重：组内去重除外的所有情况  
 
 - 示例
   ```sql
