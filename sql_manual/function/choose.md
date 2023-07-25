@@ -10,7 +10,7 @@
 * 函数说明  
     返回最小的n个值，相同的值优先返回较早的值。在`select into`中使用、和其他函数不一样。
 
-* 实例
+* 示例
     ```sql
     > select * from data order by time asc;
     name: data
@@ -58,7 +58,7 @@
 * 函数说明  
 返回字段中出现频率最高的值。
 
-* 实例
+* 示例
     ```sql
     > select * from data order by time asc;
     name: data
