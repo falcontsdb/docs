@@ -50,9 +50,9 @@ Group从句和Select从句配合起来形成了三种不同分组查询：
 
 Group从句可以通过时间分组函数Window/time，实现按时间段进行分组。  
 Window的语法格式为： `window(step, [duration], [offset])`
-- step: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 分组步长
-- duration: 分组大小，可选，默认 duration = step
-- offset:  &nbsp;&nbsp;&nbsp;&nbsp; 以 step 为基准的偏移量，可选，默认 0
+- step: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 分组步长, step始终是首尾相连的；必选参数。
+- duration: 分组时间段大小、处于时间段中的数据才参与计算（下图中灰色的部分）；可选，默认 duration = step
+- offset:  &nbsp;&nbsp;&nbsp;&nbsp; 以 step 开始为基准的偏移量（下图中白色的部分）；可选，默认 0
 
 time是window的简化版，语法格式为：`time(step, [offset])`，其等价于`window(step, [offset])`。 
 
@@ -115,7 +115,7 @@ time是window的简化版，语法格式为：`time(step, [offset])`，其等价
         6 rows in set (0.00 sec)
     ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;\* 以上示例中，time列表示每个window的起始点，不是max(water_level)对应的时间点。
+ > 以上示例中，time列表示每个window的起始点，不是max(water_level)对应的时间点。
 
 
 
