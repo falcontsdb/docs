@@ -6,9 +6,8 @@
 
 ```sql
 select_stmt=select [distinct] fields [from_clause] [into_clause] [where_clause] 
-[group_by_clause] [fill_clause] [having_clause] [order_by_clause] [limit_clause] [tz_clause]
+[group_by_clause] [having_clause] [order_by_clause] [limit_clause] [tz_clause]
 ```
-<br>
 
 
 ### Select从句
@@ -104,7 +103,7 @@ time是window的简化版，语法格式为：`time(step, [offset])`，其等价
         | 2019-08-18T00:12:00Z | coyote_creek | 8.32             |
         | 2019-08-18T00:00:00Z | coyote_creek | 8.504            |
         +----------------------+--------------+------------------+
-
+    
         name: h2o_feet
         tags: location=santa_monica
         +----------------------+--------------+------------------+
@@ -144,16 +143,19 @@ time是window的简化版，语法格式为：`time(step, [offset])`，其等价
 
 ### Having 从句
 
-having从句的语法格式为：`having condition_expr`
+​	having从句的语法格式为：`having condition_expr`
 
-Having从句目的是对分组后的数据进行过滤
+​	Having从句目的是对分组后的数据进行过滤。
 
 ### Distinct关键字
 
 distinct关键字主要是对数据去重，由于Group从句和Select从句组合产生三种分组。因此根据业务需要去重规则有两种：
 1. 组内去重：  
-  a. 筛选分组产中每个分组需要多行数据，例如：select distinct top(m,4) as m from table group by c   
-  b. 分组不聚合。例如：select distinct a,b from table group by c  
+
+     ​	a. 筛选分组产中每个分组需要多行数据，例如：select distinct top(m,4) as m from table group by c   
+
+     ​	b. 分组不聚合。例如：select distinct a,b from table group by c  
+
 2. 全局排序：组内去重除外的所有情况  
 
 - 示例
@@ -176,8 +178,11 @@ orderby从句的语法格式为：order by field1 asc|desc[,field2 asc|desc...]
 Orderby从句目的是对数据进行排序。分组的项可以是列名，也可以是一些列名的运算结果。其中注意的是列名匹配存在优先级，先匹配select从句输出的名字，没有匹配上匹配数据源中的列名。
 由于Group从句和Select从句组合产生三种分组。因此根据业务需要OrderBy有两种规则：
 1. 组内排序：  
-  a. 筛选分组产中每个分组需要多行数据，例如：select top(m,4) as m from table group by c order by m  
-  b. 分组不聚合。例如：select a,b from table group by c order by time  
+
+     ​	a. 筛选分组产中每个分组需要多行数据，例如：select top(m,4) as m from table group by c order by m  
+
+     ​	b. 分组不聚合。例如：select a,b from table group by c order by time  
+
 2. 全局排序：组内排序除外的所有情况  
 
 
@@ -205,7 +210,6 @@ Into从句目的是将一个Select查询的结果存入到另外一张表中。
 1. From从句
 1. Where从句
 1. GroupBy从句
-1. Fill从句
 1. Having从句
 1. Select从句
 1. Distinct关键字
