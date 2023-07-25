@@ -115,7 +115,7 @@ time是window的简化版，语法格式为：`time(step, [offset])`，其等价
         6 rows in set (0.00 sec)
     ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;\* 以上示例中，time列表示每个window的起始点，不是max(water_level)的时间点。
+&nbsp;&nbsp;&nbsp;&nbsp;\* 以上示例中，time列表示每个window的起始点，不是max(water_level)对应的时间点。
 
 
 
