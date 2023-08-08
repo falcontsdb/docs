@@ -318,15 +318,15 @@ SET VARIABLE "oplog-replica-clearup-max-size" = '3g'
 
 1. FCTSDB_ROOT_DIR
 
-  	设置海东青的根目录，如果此变量有值，则使用它（代替HOME DIR）作为根目录（当用海东青生成配置文件或启动海东青时，可以使用此变量）。
+设置海东青的根目录，如果此变量有值，则使用它（代替HOME DIR）作为根目录（当用海东青生成配置文件或启动海东青时，可以使用此变量）。
 
 2. FCTSDB_LICENSE
 
-    设置license内容（采用将license二进制文件的base64编码，在线编码网站：[https://www.base64encode.org/](https://www.base64encode.org/）)）
+设置license内容（采用将license二进制文件的base64编码，在线编码网站：[https://www.base64encode.org/](https://www.base64encode.org/）)）
 
 3. FCTSDB_PASSWORD
 
-  	设置初始用户的密码（初始用户为root），若海东青尚未初始化MySQL初始用户密码，则需要提供初始化密码（可通过命令行参数指定也可以通过此系统变量指定），若已经初始化，则后续启动海东青时无需指定此环境变量。
+设置初始用户的密码（初始用户为root），若海东青尚未初始化MySQL初始用户密码，则需要提供初始化密码（可通过命令行参数指定也可以通过此系统变量指定），若已经初始化，则后续启动海东青时无需指定此环境变量。
 
 ## 配置文件对应的环境变量列表
 
