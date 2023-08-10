@@ -332,51 +332,52 @@ SET VARIABLE "oplog-replica-clearup-max-size" = '3g'
 
 以下环境变量都可以在配置文件中找到其对应的配置。
 
-- FCTSDB_META_DIR 
-设置meta文件所在目录
+- FCTSDB_META_DIR
+
+  设置meta文件所在目录
 
 - FCTSDB_DATA_DIR 
 
-设置data文件所在目录 
+  设置data文件所在目录 
 
 - FCTSDB_DATA_SNAPSHOT_DIR
 
-设置snapshot文件所在目录
+  设置snapshot文件所在目录
 
 - FCTSDB_DATA_WAL_DIR
 
-设置wal文件所在目录
+  设置wal文件所在目录
 
 - FCTSDB_DATA_SERIES_TIME_INDEX_ENABLED   
 
-设置是否开启时间索引，建议设置为true
+  设置是否开启时间索引，建议设置为true
 
 - FCTSDB_DATA_LAZY_LOADING_ENABLED
 
-设置是否开启延迟加载
+  设置是否开启延迟加载
 
 - FCTSDB_DATA_QUERY_LOG_ENABLED
 
-是否打印查询语句的执行日志
+  是否打印查询语句的执行日志
 
 - FCTSDB_HTTP_LOG_ENABLED
 
-是否打印HTTP访问日志
+  是否打印HTTP访问日志
 
 - FCTSDB_MYSQL_ENABLED
 
-是否开启MySQL服务，建议设置为true
+  是否开启MySQL服务，建议设置为true
 
 - FCTSDB_MYSQL_BIND_ADDRESS
 
-设置MySQL的监听地址（比如 :9000）
+  设置MySQL的监听地址（比如 :9000）
 
 - FCTSDB_OPLOG_REPLICA_CLUSTER_ADDRS
 
-值的例子：`127.0.0.1:9090` , `127.0.0.1:9091`
+  值的例子：`127.0.0.1:9090` , `127.0.0.1:9091`
 
 - FCTSDB_MEMCONTROL_ENABLED
 
-设置是否开启内存控制
+  设置是否开启内存控制
 
 

@@ -25,7 +25,7 @@
 
 执行中且执行时间超过阈值的查询慢日志示例如下：
 
-```json
+```txt
 2022-07-20T01:59:14.199663Z     info    slow task       {"log_id": "0bnL5vSl000", "service": "task manager", "id": 3, "name": "SELECT * FROM t1.autogen.cpu LIMIT 1", "db": "t1", "rp": "", "user": "root", "start time": "2022-07-20T01:59:09.155216Z", "hard timeout": "300000.000ms", "bytes consumed": 1160, "bytes limit": 17179869184}
 ```
 
