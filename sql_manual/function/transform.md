@@ -306,6 +306,9 @@ unixtime_timestamp_nano(arg: string/int64)
 ### ternary
 
 * 函数定义
+
+ternary(bool, bool, bool)
+
 * 函数描述
 
 模拟三目运算符。若arg1值为true，则函数返回arg2，若为false则返回arg3。若arg为null，则函数返回null。

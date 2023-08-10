@@ -1,6 +1,6 @@
 # 参数配置
 
-海东青时序数据库提供**配置文件**进行部分参数配置，其余参数则由`**系统变量**`功能和`**环境变量**`进行配置。
+海东青时序数据库提供**配置文件**进行部分参数配置，其余参数则由**系统变量**功能和**环境变量**进行配置。
 
 > 注意：配置文件中的部分参数也被注册到系统变量功能中，因此这部分参数配置可同时由配置文件和系统变量进行修改
 
@@ -318,56 +318,66 @@ SET VARIABLE "oplog-replica-clearup-max-size" = '3g'
 
 1. FCTSDB_ROOT_DIR
 
-  设置海东青的根目录，如果此变量有值，则使用它（代替HOME DIR）作为根目录（当用海东青生成配置文件或启动海东青时，可以使用此变量）。
+设置海东青的根目录，如果此变量有值，则使用它（代替HOME DIR）作为根目录（当用海东青生成配置文件或启动海东青时，可以使用此变量）。
 
 2. FCTSDB_LICENSE
+
+设置license内容（采用将license二进制文件的base64编码，在线编码网站：[https://www.base64encode.org/](https://www.base64encode.org/）)）
+
 3. FCTSDB_PASSWORD
 
-  设置初始用户的密码（初始用户为root），若海东青尚未初始化MySQL初始用户密码，则需要提供初始化密码（可通过命令行参数指定也可以通过此系统变量指定），若已经初始化，则后续启动海东青时无需指定此环境变量。
+设置初始用户的密码（初始用户为root），若海东青尚未初始化MySQL初始用户密码，则需要提供初始化密码（可通过命令行参数指定也可以通过此系统变量指定），若已经初始化，则后续启动海东青时无需指定此环境变量。
 
 ## 配置文件对应的环境变量列表
 
 以下环境变量都可以在配置文件中找到其对应的配置。
 
-1. FCTSDB_META_DIR 
-1. FCTSDB_DATA_DIR   
-1. FCTSDB_DATA_SNAPSHOT_DIR
+- FCTSDB_META_DIR
+
+  设置meta文件所在目录
+
+- FCTSDB_DATA_DIR 
+
+  设置data文件所在目录 
+
+- FCTSDB_DATA_SNAPSHOT_DIR
 
   设置snapshot文件所在目录
 
-1. FCTSDB_DATA_WAL_DIR
+- FCTSDB_DATA_WAL_DIR
 
   设置wal文件所在目录
 
-1. FCTSDB_DATA_SERIES_TIME_INDEX_ENABLED   
+- FCTSDB_DATA_SERIES_TIME_INDEX_ENABLED   
 
   设置是否开启时间索引，建议设置为true
 
-1. FCTSDB_DATA_LAZY_LOADING_ENABLED
+- FCTSDB_DATA_LAZY_LOADING_ENABLED
 
   设置是否开启延迟加载
 
-1. FCTSDB_DATA_QUERY_LOG_ENABLED
+- FCTSDB_DATA_QUERY_LOG_ENABLED
 
   是否打印查询语句的执行日志
 
-1. FCTSDB_HTTP_LOG_ENABLED
+- FCTSDB_HTTP_LOG_ENABLED
 
   是否打印HTTP访问日志
 
-1. FCTSDB_MYSQL_ENABLED
+- FCTSDB_MYSQL_ENABLED
 
   是否开启MySQL服务，建议设置为true
 
-1. FCTSDB_MYSQL_BIND_ADDRESS
+- FCTSDB_MYSQL_BIND_ADDRESS
 
-  设置MySQL的监听地址（比如 `:9000`）
+  设置MySQL的监听地址（比如 :9000）
 
-1. FCTSDB_OPLOG_REPLICA_CLUSTER_ADDRS                
+- FCTSDB_OPLOG_REPLICA_CLUSTER_ADDRS
 
-  值的例子：`127.0.0.1:9090,127.0.0.1:9091`
+  值的例子：`127.0.0.1:9090` , `127.0.0.1:9091`
 
-1. FCTSDB_MEMCONTROL_ENABLED
+- FCTSDB_MEMCONTROL_ENABLED
 
   设置是否开启内存控制
+
 
