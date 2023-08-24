@@ -1,30 +1,27 @@
 # 集群部署
 
-# **主从复制**
+# 主从复制配置文件说明
 
-海东青数据库支持一主多从日志复制模式，以满足高可用特性。
+海东青数据库支持一主多从日志复制模式，以满足高可用特性，并且支持主从故障自动切换。
+主从复制相关的配置在配置文件的 `rpc-server` 和 `oplog-replica` 段，配置文件示例请参考[参数配置](./configuration.md)。
 
-**配置文件详解**
+### rpc-server
 
-主从复制相关的配置在配置文件的 rpc-server 和 oplog-replica 段。
+`bind-addr`：海东青数据库主从节点复制使用 rpc 交互，所以开启数据库的 rpc 服务是前提，需要配置 rpc 服务监听地址。
 
-**rpc-server**
+###  oplog-replica
 
-●bind-addr：海东青数据库主从节点复制使用 rpc 交互，所以开启数据库的 rpc 服务是前提，需要配置  rpc 地址
+`role`：海东青数据库实例在主从复制中的角色，分为 leader 和 follower，默认为 leader。follower 会连接至 leader 并从 leader 拉取数据。follower 只支持读数据，而 leader 可读可写。
 
-**oplog-replica**
+`min-isr`：该项指定海东青数据库主从复制时数据一致性的强度，默认为 1，即日志只用写入本节点即可成功返回。该值表明日志至少同步至多少个节点时才算写入成功，值越大，集群间数据的一致性就越强，但可用性也会相应降低。
 
-●role：海东青数据库实例在主从复制中的角色，分为 leader 和 follower，默认为 leader。follower 会连接至 leader 并从 leader 拉取数据。follower 只支持读数据，而 leader 可读可写。
+`replica-enabled`：是否开启主从日志复制
 
-●min-isr：该项指定海东青数据库主从复制时数据一致性的强度，默认为 1，即日志只用写入本节点即可成功返回。该值表明日志至少同步至多少个节点时才算写入成功，值越大，集群间数据的一致性就越强，但可用性也会相应降低。
-
-●replica-enabled：是否开启主从日志复制
-
-●cluster-addrs：集群中其他节点的 rpc 地址。当本数据库实例切换至 follower 时，会从该项配置的地址列表中寻找 leader。
+`cluster-addrs`：集群中其他节点的 rpc 地址。当本数据库实例切换至 follower 时，会从该项配置的地址列表中寻找 leader。如果不需要使用主从故障自动切换，那么主节点的`cluster-addrs`可以直接留空，从节点的`cluster-addrs`则也只需要填写主节点`rpc-server`中的`bind-addr`选项值即可。此外，海东青支持运行时使用API进行动态修改节点。
 
 # API 介绍
 
-## 设置数据库在主从复制中的角色
+### 设置数据库在主从复制中的角色
 
 Method：POST 
 
@@ -42,7 +39,7 @@ Response：NoContent
 
 > Note：该 api 会切换当前数据库的角色，配置文件中的 `oplog-replica.role` 字段也会被同步更改。
 
-## 查询数据库在主从复制中的角色
+### 查询数据库在主从复制中的角色
 
 Method：GET
 
@@ -61,7 +58,7 @@ Response：
 }
 ```
 
-## 向 clusterAddrs 列表中新增 rpc 地址
+### 向 clusterAddrs 列表中新增 rpc 地址
 
 Method：POST 
 
@@ -82,7 +79,7 @@ Response：NoContent
 
 Note：配置文件中的 `oplog-replica.cluster-addrs`字段也会被同步更改。
 
-## 从 clusterAddrs 列表中删除 rpc 地址
+### 从 clusterAddrs 列表中删除 rpc 地址
 
 Method：DELETE
 
@@ -102,36 +99,36 @@ Body：
 
 api 提供客户端或者工具调用，但不便于人工调用，因此为了方便管理员管理主从集群，fcshell 也相应新增了若干管理命令。
 
-## 设置数据库在主从复制中的角色
+### 设置数据库在主从复制中的角色
 
-```JSON
+```Bash
 > set state leader
 > set state follower
 ```
 
-## 查看数据库在主从复制中的角色
+### 查看数据库在主从复制中的角色
 
-```JSON
+```Bash
 > show state
 state: leader
 nodes: [172.19.192.37:18092 172.19.192.37:18091]
 ```
 
-## 向 clusterAddrs 列表中新增 rpc 地址
+### 向 clusterAddrs 列表中新增 rpc 地址
 
-```JSON
+```Bash
 > append nodes "172.19.192.37:18092" "172.19.192.37:18091"
 ```
 
-## 从 clusterAddrs 列表中删除 rpc 地址
+### 从 clusterAddrs 列表中删除 rpc 地址
 
-```JSON
+```
 > drop nodes "172.19.192.37:18092" "172.19.192.37:18091"
 ```
 
-## 查看某 shard 的锚点记录
+### 查看某 shard 的锚点记录
 
-```JSON
+```Bash
 > show anchorpoints for shard db_autogen_20220718000000_20220725000000
 NodeID: 1658301619406535600, Value: 1
 NodeID: 1658301621632950800, Value: 3
@@ -147,7 +144,7 @@ NodeID: 1658301621632950800, Value: 7
 
 以 Keepalived 为例，海东青数据库提供了 API 供 keepalived 探活和状态切换，调用这些 API 的 shell 脚本参考如下：
 
-* 健康检测脚本
+### 健康检测脚本
 
 ```bash
 #!/bin/bash
@@ -169,8 +166,7 @@ fi
 需要通过命令行参数向该脚本传递数据库实例的 http 地址(`ip:port` 形式)。
 
 
-
-* 角色切换脚本
+### 角色切换脚本
 
 ```bash
 #!/bin/bash
@@ -190,7 +186,7 @@ curl -X POST -H "'Content-type':'application/json'" -d "{\"role\":\"${role}\"}" 
 
 因为海东青数据库的主从复制并不是强一致的，而是优先保证高可用，故不同节点间数据发生冲突在所难免。在日常使用场景中，大部分的冲突都能被自动处理，无需应用和管理员介入。只存在如下少量场景需要管理员人工处理冲突。
 
-## metadata 冲突
+### metadata 冲突
 
 若主从复制时 metadata 存在冲突，则从节点的 meta 目录下有个文件 `merge_meta_desc` 会对冲突进行描述。
 
@@ -202,7 +198,7 @@ curl -X POST -H "'Content-type':'application/json'" -d "{\"role\":\"${role}\"}" 
 1. 从节点删除存在冲突的 db、rp 或 shard。
 1. 将第一步中导出的数据 import 至主节点。
 
-## shard 数据冲突
+### shard 数据冲突
 
 在 shard 自动处理日志冲突时，若发现部分存在冲突的日志已被删除，则会跳过冲突处理，继续后续的日志复制，尽可能保证可用性。这时就需要运维来手动处理主从 shard 数据的冲突。
 

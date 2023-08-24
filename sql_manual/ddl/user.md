@@ -8,8 +8,8 @@
 
 ```sql
 /*示例： */
-create user "jdoe" with password '1qaz!QAZ' with ALL PRIVILEGES /*创建拥有超级管理员权限的用户*/
-create user "tom" with password '1qaz!QAZ' 
+create user jdoe with password '1qaz!QAZ' with ALL PRIVILEGES /*创建拥有超级管理员权限的用户*/
+create user tom with password '1qaz!QAZ' 
 ```
 
 ### 查看用户

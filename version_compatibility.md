@@ -180,7 +180,10 @@ license.license-path
 # v1.4.2升级到v1.5.0
 
 1. 可直接二进制替换升级。
-1. 若需要配置主从，则需要修改主从相关配置，请参考：[https://rockontrol.yuque.com/si6a0z/plw06o/xkr5wx](https://rockontrol.yuque.com/si6a0z/plw06o/xkr5wx)
+1. 若需要配置主从，则需要修改主从相关配置:`[oplog-replica]`和`[rpc-server]`两部分，请参考 [集群部署](./ops/clustered_deploy.md)。
+
+# v1.5.0升级到v2.0.0
+可直接二进制替换升级。
 
 # 注意事项
 
